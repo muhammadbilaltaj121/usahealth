@@ -23,6 +23,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 			},
 		};
 	}
+
+	if (referringURL?.includes('pinterest.com') || fbclid) {
+		return {
+			redirect: {
+				permanent: false,
+				destination: `${
+					'https://usahealthtip.com/' + encodeURI(path as string)
+				}`,
+			},
+		};
+	}
 	const query = gql`
 		{
 			post(id: "/${path}/", idType: URI) {
